@@ -1,5 +1,7 @@
 package tp03.ejercicio2;
 
+import tp02.ejercicio2.*;
+
 public class ArbolBinario<T> {
 	private T dato;
 	private ArbolBinario<T> hijoIzquierdo;   
@@ -120,22 +122,27 @@ public class ArbolBinario<T> {
 
 	public void entreNiveles(int n, int m){
 		
-		//Usando un COLA, Encolo Arbol entero
-				ColaGenerica <ArbolBinario <Integer>> cola = new ColaGenerica <ArbolBinario <Integer>>();
-				cola.encolar(ab);
+				//Usando un COLA, Encolo Arbol entero
+				ColaGenerica <ArbolBinario <T>> cola = new ColaGenerica <ArbolBinario <T>>();
+				cola.encolar(this);
 				// Encolamos un NULL para CAMBIO DE NIVEL
 				cola.encolar(null);
+				
+				int nivel = 1;
 				
 				
 				//	MIENTRAS HAYA COSAS EN LA COLA
 				while (!cola.esVacia()) {
 					//Saco de la cola en var SUBARBOL, proceso
-					ArbolBinario<Integer> subArbol = cola.desencolar();
+					
+						ArbolBinario<T> subArbol = cola.desencolar();
 					
 					// Reviso si es NULL o OBJETO, si es OBJETO, proceso
 					if (subArbol != null) {
 					
-						System.out.println(subArbol.getDato());
+						if ((n <= nivel) && (nivel <= m)) {
+							System.out.println(subArbol.getDato());
+						}
 						//Tiene HI, lo encolo
 						if (subArbol.tieneHijoIzquierdo()) {
 							cola.encolar(subArbol.getHijoIzquierdo());
@@ -147,8 +154,9 @@ public class ArbolBinario<T> {
 					}  else { // en cambio si es NULL
 						// Pregunto si ESTA VACIA, para que no itere con nulls infinitamente
 						if (!cola.esVacia()) {	//Si NO esta vacia, le encolamos null
-							cola.encolar(null);		
+							cola.encolar(null);
 							//NO ES LO MISMO VACIA, QUE TENER NULLS
+							nivel++;
 						}
 					}
 				}

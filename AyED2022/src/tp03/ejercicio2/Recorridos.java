@@ -1,5 +1,8 @@
 package tp03.ejercicio2;
 
+import tp02.ejercicio2.*;
+
+
 public class Recorridos {
 	
 	public void preOrder (ArbolBinario <Integer> arbol) {
@@ -49,11 +52,13 @@ public class Recorridos {
 	}
 	
 	public void porNiveles (ArbolBinario <Integer> ab) {
-		//Usando un COLA, Encolo Arbol entero
+		//Usando una COLA, Encolo Arbol entero
 		ColaGenerica <ArbolBinario <Integer>> cola = new ColaGenerica <ArbolBinario <Integer>>();
 		cola.encolar(ab);
 		// Encolamos un NULL para CAMBIO DE NIVEL
 		cola.encolar(null);
+		int nivel = 1;
+		System.out.println("Nivel " + nivel);
 		
 		
 		//	MIENTRAS HAYA COSAS EN LA COLA
@@ -78,6 +83,8 @@ public class Recorridos {
 				if (!cola.esVacia()) {	//Si NO esta vacia, le encolamos null
 					cola.encolar(null);		
 					//NO ES LO MISMO VACIA, QUE TENER NULLS
+					nivel++;
+					System.out.println("Nivel " + nivel);
 				}
 			}
 		}

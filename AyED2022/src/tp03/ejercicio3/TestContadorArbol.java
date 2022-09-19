@@ -1,9 +1,11 @@
-package tp03.ejercicio2;
+package tp03.ejercicio3;
 
-public class TestEjs {
+import tp02.ejercicio2.ListaEnlazadaGenerica;
+import tp03.ejercicio2.ArbolBinario;
 
+public class TestContadorArbol {
+	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		
 		ArbolBinario <Integer> ab = new ArbolBinario <Integer>(10);
 		
@@ -20,23 +22,22 @@ public class TestEjs {
 		hd.agregarHijoIzquierdo(hdi);
 		
 		
-		Recorridos recorrer = new Recorridos();
-		/*
-		recorrer.preOrder(ab);
+		ContadorArbol contador = new ContadorArbol ();
 		
-		System.out.println();
+		contador.setArbol(ab);
 		
-		ArbolBinario<Integer> arbolEspejo = new ArbolBinario <Integer>();
+		ListaEnlazadaGenerica <Integer> lista = new ListaEnlazadaGenerica <Integer>();
+	
 		
-		arbolEspejo = ab.espejo();
+		lista = contador.numerosPares();
 		
-		recorrer.preOrder(arbolEspejo);
-		*/
+		lista.comenzar();
 		
-		//recorrer.porNiveles(ab);
+		lista.agregarFinal(13);
 		
-		ab.entreNiveles(1, 2);
-		
+		while (!lista.fin()){
+			System.out.println(lista.proximo());
+		}
 
 	}
 

@@ -1,21 +1,21 @@
 package tp02.ejercicio2;
 
-public class ColaGenerica <T> {
+public class PilaGenerica <T>{
 	
 	private ListaGenerica <T> datos;
 	
-	public ColaGenerica () {
+public PilaGenerica () {
 		
 		this.datos = new ListaEnlazadaGenerica <T>();
 	}
 	
-	public void encolar (T datoT) {
+	public void apilar (T datoT) {
 		
-		this.datos.agregarFinal(datoT);
+		this.datos.agregarInicio(datoT);
 		
 	}
 	
-	public T desencolar () {
+	public T desapilar () {
 		
 		T nodo = null;
 		
@@ -23,7 +23,7 @@ public class ColaGenerica <T> {
 			
 			nodo = this.datos.elemento(1);
 			
-			this.datos.eliminarEn(1);
+			this.datos.eliminar(nodo);
 			
 		}
 		
@@ -38,7 +38,7 @@ public class ColaGenerica <T> {
 		
 		if (!this.datos.esVacia()) {
 			
-			nodo = this.datos.elemento(this.datos.tamanio());
+			nodo = this.datos.elemento(1);
 		}
 		
 		return nodo;
@@ -51,3 +51,4 @@ public class ColaGenerica <T> {
 	
 
 }
+
