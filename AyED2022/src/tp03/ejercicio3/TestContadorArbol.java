@@ -2,6 +2,7 @@ package tp03.ejercicio3;
 
 import tp02.ejercicio2.ListaEnlazadaGenerica;
 import tp03.ejercicio2.ArbolBinario;
+import tp03.ejercicio2.Recorridos;
 
 public class TestContadorArbol {
 	
@@ -21,6 +22,11 @@ public class TestContadorArbol {
 		hi.agregarHijoDerecho(hid);
 		hd.agregarHijoIzquierdo(hdi);
 		
+		Recorridos recorrer = new Recorridos ();
+		
+		recorrer.inOrder(ab);
+		System.out.println("-------------------------------------------");
+		
 		
 		ContadorArbol contador = new ContadorArbol ();
 		
@@ -33,11 +39,16 @@ public class TestContadorArbol {
 		
 		lista.comenzar();
 		
-		lista.agregarFinal(13);
-		
 		while (!lista.fin()){
 			System.out.println(lista.proximo());
 		}
+		
+		
+		
+	
+		
+		
+		
 
 	}
 

@@ -32,9 +32,9 @@ public class ContadorArbol {
 		
 		ListaEnlazadaGenerica <Integer> lista = new ListaEnlazadaGenerica <Integer>();
 		
-		//this.inOrder(arbol, lista);
+		this.inOrder(this.arbol, lista);
 		
-		this.postOrder(arbol, lista);
+		//this.postOrder(this.arbol, lista);
 		
 		
 		return lista;
@@ -52,8 +52,8 @@ public class ContadorArbol {
 			}
 			
 			
-			if (this.arbol.getDato() / 2 == 0) {
-				lista.agregarFinal(this.arbol.getDato());
+			if (arbol.getDato() % 2 == 0) {
+				lista.agregarFinal(arbol.getDato());
 			}
 			
 			if (arbol.tieneHijoDerecho()) {
@@ -76,9 +76,9 @@ public class ContadorArbol {
 			if (arbol.tieneHijoDerecho()) {
 				postOrder(arbol.getHijoDerecho(), lista);
 			}
-			
-			if (this.arbol.getDato() >  0) {
-				lista.agregarFinal(this.arbol.getDato());
+			//Aca deberia ir THIS.ARBOL o el ARBOL del metodo actual? Con THIS imprime todo, Y con solo ARBOL, lo correcto. QUÉ PASA?
+			if ((arbol.getDato() % 2) ==  0) {
+				lista.agregarFinal(arbol.getDato());
 			}
 		}
 	}
