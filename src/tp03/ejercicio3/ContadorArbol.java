@@ -76,7 +76,7 @@ public class ContadorArbol {
 			if (arbol.tieneHijoDerecho()) {
 				postOrder(arbol.getHijoDerecho(), lista);
 			}
-			//Aca deberia ir THIS.ARBOL o el ARBOL del metodo actual? Con THIS imprime todo, Y con solo ARBOL, lo correcto. QUÉ PASA?
+			//Acá deberia ir THIS.ARBOL o el ARBOL del metodo actual? Con THIS imprime todo, Y con solo ARBOL, lo correcto. QUÉ PASA?
 			if ((arbol.getDato() % 2) ==  0) {
 				lista.agregarFinal(arbol.getDato());
 			}

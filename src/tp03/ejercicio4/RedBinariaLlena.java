@@ -28,28 +28,26 @@ public class RedBinariaLlena {
 
 
 	public int retardoReenvio () {
-
 		//Que cada nodo mande el maximo
 		//Me quedo con el maximo de los 2
-		//
-		
+		return (conseguirMaximo(this.ab));
 		
 	}
-	
-	public int postOrden (ArbolBinario <Integer> arbol) {
-		int suma = 0;
-		if (!arbol.esVacio()) {
-			if (arbol.tieneHijoIzquierdo()) {
-				suma += postOrden(arbol.getHijoIzquierdo());
+
+	private int conseguirMaximo(ArbolBinario<Integer> unArbol) {
+		int max = 0;
+		int m1 = 0;
+		int m2 = 0;
+		if (!unArbol.esVacio()) {
+			if (unArbol.tieneHijoIzquierdo()) {
+				m1 = conseguirMaximo(unArbol.getHijoIzquierdo());
 			}
-			
-			if (arbol.tieneHijoDerecho()) {
-				suma+= postOrden(arbol.getHijoDerecho());
+			if (unArbol.tieneHijoDerecho()) {
+				m2 = conseguirMaximo(unArbol.getHijoDerecho());
 			}
-			
-			
+			max = Math.max(m1, m2) + unArbol.getDato();
 		}
-		return suma;
+		return max;
 	}
 
 }

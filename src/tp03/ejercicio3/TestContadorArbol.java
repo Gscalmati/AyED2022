@@ -22,9 +22,7 @@ public class TestContadorArbol {
 		hi.agregarHijoDerecho(hid);
 		hd.agregarHijoIzquierdo(hdi);
 		
-		RecorridosGeneral recorrer = new RecorridosGeneral ();
 		
-		recorrer.inOrder(ab);
 		System.out.println("-------------------------------------------");
 		
 		
@@ -43,13 +41,6 @@ public class TestContadorArbol {
 			System.out.println(lista.proximo());
 		}
 		
-		
-		
-	
-		
-		
-		
-
 	}
 
 }

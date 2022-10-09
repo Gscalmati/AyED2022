@@ -17,7 +17,9 @@ public class EPAB {
 		}
 		
 		public void recursion (Resultado resultado, 
-				ArbolGeneral<Float> ag, ListaEnlazadaGenerica <Float> actual, double suma) {
+				ArbolGeneral<Float> ag, 
+				ListaEnlazadaGenerica <Float> actual, 
+				double suma) {
 			
 			if (!ag.esVacio()) {
 				suma += ag.getDato();
