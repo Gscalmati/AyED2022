@@ -72,6 +72,7 @@ public class ArbolGeneral<T> {
 		return null;
 	}
 
+	//Recursivo, lo mas util
 	public Integer altura() {
 
 		return this.extraerAltura(this);
@@ -101,48 +102,56 @@ public class ArbolGeneral<T> {
 		return alturaAct;
 	}
 
+	//Recursivo es mas dificil, por niveles rinde mas, pq si o si tenes que buscar en tooooodo el arbol
 	public Integer nivel(T dato) {
-		// falta implementar
-		return buscarDato(this, dato);
+		if (this.esVacio()) {
+			return -1;
+		}
+		return this.buscarDato (this, dato);
 	}
 	
-	private Integer buscarDato(ArbolGeneral<T> ag, T dato) {
-		Integer alturaAct = 0;
-		// Si el arbol es Vacio, la altura es 0;
-		if (this.esVacio()) {
-			return alturaAct;
-		} else {
-			//Si NO está vacío, recorro sus hijos, de tenerlos
-			if (ag.tieneHijos()) {
-				ListaGenerica<ArbolGeneral<T>> hijos = ag.getHijos();
+	private Integer buscarDato (ArbolGeneral<T> ag, T dato) {
+		
+		Integer nivel = 0;
+		
+		if (!ag.esVacio()) {
+			
+			if (ag.tieneHijos() && nivel == 0) {
+				ListaGenerica <ArbolGeneral<T>> hijos = ag.getHijos();
 				hijos.comenzar();
-
-				//Me quedo con la altura maxima entre todos los hijos
-				Integer altAux = 0;
-				while (!hijos.fin()) {
-					altAux = Math.max(altAux, hijos.proximo().altura());
+				nivel = this.buscarDato(hijos.proximo(), dato);
+			}
+			
+			
+			if (ag.getDato() == dato) {
+				nivel = 1;
+			} else {
+				if (nivel >= 1) {
+					nivel ++;
 				}
-				//Sumo 1 a la altura actual, y le sumo la altura Max de los hijos
-				alturaAct++;
-				alturaAct = alturaAct + altAux;
 			}
 		}
-		return alturaAct;
+		return nivel;
 	}
 
+	//Por niveles es mas comodo
 	public Integer ancho() {
 		Integer anchoArbol = 0;
+		Integer alturaAux = 0;
 		if (!this.esVacio()) {
 			// Si el arbol tiene hijos, me quedo con su ancho
 			if (this.tieneHijos()) {
-				anchoArbol = this.hijos.tamanio();
+				alturaAux = this.hijos.tamanio();
 				// Recorro sus hijos comparando el Maximo entre el anchoArbol y sus hijos, y me
 				// quedo con el mayor
 				ListaGenerica<ArbolGeneral<T>> hijos = this.getHijos();
 				hijos.comenzar();
 				while (!hijos.fin()) {
-					anchoArbol = Math.max(anchoArbol, hijos.proximo().ancho());
+					alturaAux += hijos.proximo().ancho();
 				}
+			}
+			if (alturaAux > anchoArbol) {
+				anchoArbol = alturaAux;
 			}
 
 		}
