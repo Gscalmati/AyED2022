@@ -1,12 +1,11 @@
-package tp03.ejercicio3;
+package tp03.ejercicio5;
 
-import tp02.ejercicio2.ListaEnlazadaGenerica;
 import tp03.ejercicio2.ArbolBinario;
-import tp04.ejercicio2.RecorridosGeneral;
 
-public class TestContadorArbol {
-	
+public class TestProfundidadDeArbolBinario {
+
 	public static void main(String[] args) {
+		// TODO Auto-generated method stub
 		
 		ArbolBinario <Integer> ab = new ArbolBinario <Integer>(10);
 		
@@ -21,26 +20,10 @@ public class TestContadorArbol {
 		
 		hi.agregarHijoDerecho(hid);
 		hd.agregarHijoIzquierdo(hdi);
-		
-		
-		System.out.println("-------------------------------------------");
-		
-		
-		ContadorArbol contador = new ContadorArbol ();
-		
-		contador.setArbol(ab);
-		
-		ListaEnlazadaGenerica <Integer> lista = new ListaEnlazadaGenerica <Integer>();
-	
-		
-		lista = contador.numerosPares();
-		
-		lista.comenzar();
-		
-		while (!lista.fin()){
-			System.out.println(lista.proximo());
-		}
-		
+
+		ProfundidadDeArbolBinario prof = new ProfundidadDeArbolBinario();
+		prof.setAb(ab);
+		System.out.println(prof.sumaElementosProfundidad(4));
 	}
 
 }

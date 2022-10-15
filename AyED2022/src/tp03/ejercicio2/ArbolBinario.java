@@ -162,6 +162,63 @@ public class ArbolBinario<T> {
 				}
 				//	FIN MIENTRAS
 			}
+	
+	
+	//-----------------------------------------------------------------------------------------------------------
+		// BUSCAR EL CAMINO MAS EXTENSO
+		public ListaEnlazadaGenerica <T> caminoMasLargo () {
+			
+			ListaEnlazadaGenerica <T> actual = new ListaEnlazadaGenerica <T> ();
+			ListaEnlazadaGenerica <T> max = new ListaEnlazadaGenerica <T> ();
+			Integer cantA = 0;
+			Integer [] cantM = {0}; 
+			this.recursion(actual, max, this, cantA, cantM);
+			
+			return max;
+		}
+		
+		private void recursion (ListaEnlazadaGenerica <T> actual, ListaEnlazadaGenerica <T> maximo, ArbolBinario <T> arbol, Integer cantParActual, Integer [] cantParMax) {
+			if (!arbol.esVacio()) {
+				actual.agregarFinal(arbol.getDato());
+				if (!arbol.esHoja()) {
+					if (arbol.tieneHijoIzquierdo()) {
+						this.recursion(actual, maximo, arbol.getHijoIzquierdo(), cantParActual, cantParMax);
+					}
+					if (arbol.tieneHijoDerecho()) {
+						this.recursion(actual, maximo, arbol.getHijoDerecho(), cantParActual, cantParMax);
+					}
+				} else {
+					if (actual.tamanio() > maximo.tamanio()) {
+						this.copiarListas(maximo, actual);
+					} else {
+						if (actual.tamanio() == maximo.tamanio()) {
+							if (cantParActual > cantParMax[0]) {
+								this.copiarListas(maximo, actual);
+								cantParMax[0] = cantParActual;
+								//O Hago una clase "Resultado con 2 var. instancias: la lista, y el contador de pares"
+								
+							}
+							
+						}
+					}
+				}
+				
+				actual.eliminarEn(actual.tamanio());
+				//No es necesario decrementar cantParActual ya que muere al final de la ejecucion
+			}
+		}
+
+		private void copiarListas(ListaEnlazadaGenerica<T> maximo, ListaEnlazadaGenerica<T> actual) {
+			maximo.comenzar();
+			while (!maximo.fin()){
+				maximo.elemento(1);
+				maximo.proximo();
+			}
+			actual.comenzar();
+			while (!actual.fin()) {
+				maximo.agregarFinal(actual.proximo());
+			}
+		}
 
 
 	

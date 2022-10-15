@@ -1,5 +1,7 @@
 package tp03.ejercicio2;
 
+import tp04.ejercicio2.RecorridosGeneral;
+
 public class TestEjs {
 
 	public static void main(String[] args) {
@@ -20,7 +22,7 @@ public class TestEjs {
 		hd.agregarHijoIzquierdo(hdi);
 		
 		
-		Recorridos recorrer = new Recorridos();
+		RecorridosGeneral recorrer = new RecorridosGeneral();
 		/*
 		recorrer.preOrder(ab);
 		
