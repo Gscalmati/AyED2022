@@ -24,20 +24,25 @@ public class TestRecorridos {
 		
 		grafo.conectar(v1, v2);
 		grafo.conectar(v1, v3);
+		
 		grafo.conectar(v2, v1);
 		grafo.conectar(v2, v3);
 		grafo.conectar(v2, v4);
+		
 		grafo.conectar(v3, v1);
 		grafo.conectar(v3, v2);
 		grafo.conectar(v3, v4);
+		
 		grafo.conectar(v4, v2);
 		grafo.conectar(v4, v3);
 		grafo.conectar(v4, v5);
 		
+		grafo.conectar(v5, v4);
+		
 		Recorridos rec = new Recorridos ();
 		
-		//rec.dfs(grafo, 2);
-		rec.bfs(grafo, 2);
+		rec.dfs(grafo, 5);
+		//rec.bfs(grafo, 5);
 	}
 
 }

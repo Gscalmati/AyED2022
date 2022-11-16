@@ -108,7 +108,7 @@ public class Recorridos <T>{
 					Vertice<Integer> vDestino = aristaAux.verticeDestino();
 					// Si el vertice destino NO ESTA VISITADO, lo MARCO, y lo encolo
 					if (visitados[vDestino.getPosicion()] == false) {
-						visitados[vertice.getPosicion()] = true;
+						visitados[vDestino.getPosicion()] = true;
 						cola.encolar(vDestino);
 					}
 				}
