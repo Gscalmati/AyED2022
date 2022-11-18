@@ -5,19 +5,23 @@ import tp02.ejercicio2.ListaGenerica;
 
 public class Resultado {
 	
-	private Integer cantVert = 0;
-	private ListaEnlazadaGenerica<String> mejorCamino;
+	private double cantKms = Double.MAX_VALUE;
+	private ListaGenerica<String> mejorCamino;
 	
-	public Integer getCantVert() {
-		return cantVert;
+	public Resultado () {
+		this.mejorCamino = new ListaEnlazadaGenerica<String> ();
 	}
-	public void setCantVert(Integer cantVert) {
-		this.cantVert = cantVert;
+	
+	public Double getCantKms() {
+		return cantKms;
 	}
-	public ListaEnlazadaGenerica<String> getMejorCamino() {
+	public void setCantKms(Double cantVert) {
+		this.cantKms = cantVert;
+	}
+	public ListaGenerica<String> getMejorCamino() {
 		return mejorCamino;
 	}
-	public void setMejorCamino(ListaEnlazadaGenerica<String> mejorCamino) {
+	public void setMejorCamino(ListaGenerica<String> mejorCamino) {
 		this.mejorCamino = mejorCamino;
 	}
 	

@@ -43,7 +43,7 @@ public class EP {
 				Arista <T> arista = aristas.proximo();
 				Vertice <T> verticeD = arista.verticeDestino();
 				if (!visitados[verticeD]) {
-					tthis.dfs_private_primerCaminoPosible (grado, verticeD, visitados, datoB, camino, temporal);
+					this.dfs_private_primerCaminoPosible (grado, verticeD, visitados, datoB, camino, temporal);
 				}
 			
 			}
