@@ -7,7 +7,16 @@ public class Resultado {
 	
 	private double cantKms = Double.MAX_VALUE;
 	private ListaGenerica<String> mejorCamino;
+	private Integer cargas = Integer.MAX_VALUE;
 	
+	public Integer getCargas() {
+		return cargas;
+	}
+
+	public void setCargas(Integer cargas) {
+		this.cargas = cargas;
+	}
+
 	public Resultado () {
 		this.mejorCamino = new ListaEnlazadaGenerica<String> ();
 	}

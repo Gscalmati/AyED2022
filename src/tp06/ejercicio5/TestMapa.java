@@ -88,6 +88,8 @@ public class TestMapa {
 		
 		// Inciso E
 		
+		camino = mapa.caminoConMenorCargaCombustible("La Plata", "Villa Elisa", 50);
+		
 		System.out.println("------------------------------------");
 		camino.comenzar();
 		while(!camino.fin()) {
