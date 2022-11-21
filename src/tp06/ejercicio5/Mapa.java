@@ -55,6 +55,7 @@ public class Mapa {
 			this.caminoRecursion(resul, vertice, camino, temporal, ciudad2, visitados);
 		}
 		
+
 		return resul.getMejorCamino();
 	}
 	
@@ -204,7 +205,7 @@ public class Mapa {
 					}
 				}
 			} else {
-					System.out.println("Kms totales " + kms + " temporal hasta aca tiene estos nodos " + temporal.tamanio());
+					//System.out.println("Kms totales " + kms + " temporal hasta aca tiene estos nodos " + temporal.tamanio());
 					if (kms <= resultado.getCantKms()) {
 						resultado.setCantKms(kms);
 						resultado.setMejorCamino(temporal.clonar());						
@@ -277,7 +278,7 @@ public class Mapa {
 
 	private double calcularLitrosPorViaje(double kmsViaje) {
 		
-		double kmsLitro = 12;
+		double kmsLitro = 10;
 		return kmsViaje/kmsLitro;
 	}
 	
@@ -296,7 +297,7 @@ public class Mapa {
 			ListaGenerica<String> temporal = new ListaEnlazadaGenerica<String> ();
 			boolean [] visitados = new boolean [this.mapaCiudades.listaDeVertices().tamanio()];
 			Integer cargas = 0;
-			this.caminoRecursionMenorCombustible(resul, vertice, temporal, visitados, destino, tanque, cargas);
+			this.caminoRecursionMenorCombustible(resul, vertice, temporal, visitados, destino, tanque, cargas, tanqueAuto);
 		}
 		
 		return resul.getMejorCamino();
@@ -308,7 +309,8 @@ public class Mapa {
 			boolean[] visitados, 
 			String destino, 
 			double tanque,
-			Integer cargas) {
+			Integer cargas, 
+			Integer maxTanque) {
 		
 			visitados[vertice.getPosicion()-1] = true;
 			temporal.agregarFinal(vertice.dato());
@@ -323,26 +325,28 @@ public class Mapa {
 					Vertice<String> verticeD = arista.verticeDestino();
 					
 					double consumoViaje = tanque - this.calcularLitrosPorViaje(arista.peso());
+					boolean puedeViajar = this.verificarViaje(tanque, this.calcularLitrosPorViaje(arista.peso()));
+					if (!puedeViajar){
+						tanque = maxTanque;
+						cargas++;
+						puedeViajar = this.verificarViaje(tanque, this.calcularLitrosPorViaje(arista.peso()));
+						consumoViaje = tanque - this.calcularLitrosPorViaje(arista.peso());
+					}
+					if (!puedeViajar) {
+						System.out.println("No viajo por acá");
+					}
 					
-					if (!visitados[verticeD.getPosicion()-1] && consumoViaje > 0) {
-						System.out.println("Cargas " + cargas);
+					if (!visitados[verticeD.getPosicion()-1] && puedeViajar) {
 						tanque = consumoViaje;
-						this.caminoRecursionMenorCombustible(resul, verticeD, temporal, visitados, destino, tanque, cargas);
-					} else if (!visitados[verticeD.getPosicion()-1]) {
-							tanque = 50;
-							cargas++;
-							System.out.println("Cargas " + cargas);
-							this.caminoRecursionMenorCombustible(resul, verticeD, temporal, visitados, destino, tanque, cargas);
-						
+						this.caminoRecursionMenorCombustible(resul, verticeD, temporal, visitados, destino, tanque, cargas, maxTanque);
 					}
 				}
 			} else {
-				System.out.println("Llegue a " + vertice.dato());
+				System.out.println("Cargas del viaje " + cargas + " y cargas de Resul " + resul.getCargas());
 				if (cargas < resul.getCargas()) {
-					System.out.println("Carga menor");
-					System.out.println(temporal.tamanio());
 					resul.setCargas(cargas);
-					resul.setMejorCamino(temporal);
+					resul.setMejorCamino(temporal.clonar());
+					System.out.println("NUEVO CAMINO");
 				}
 			}
 			
@@ -350,6 +354,88 @@ public class Mapa {
 			temporal.eliminarEn(temporal.tamanio());
 		
 	}
+	
+private boolean verificarViaje (double litrosTanque, double litrosViaje) {
+		
+		boolean puedeViajar = false;
+		double consumoViaje = litrosTanque - litrosViaje;
+		if (consumoViaje > 0) {
+			puedeViajar = true;
+		}
+		
+		return puedeViajar;
+
+	}
+/*
+
+ //VERSION FEA PERO QUE FUNCA 
+  
+  private void caminoRecursionMenorCombustible(Resultado resul, 
+			Vertice<String> vertice,
+			ListaGenerica<String> temporal, 
+			boolean[] visitados, 
+			String destino, 
+			double tanque,
+			Integer cargas, 
+			Integer maxTanque) {
+		
+			visitados[vertice.getPosicion()-1] = true;
+			temporal.agregarFinal(vertice.dato());
+			
+			if (!vertice.dato().equals(destino)) {
+				
+				ListaGenerica<Arista<String>> aristas = this.mapaCiudades.listaDeAdyacentes(vertice);
+				aristas.comenzar();
+				
+				while (!aristas.fin()) {
+					Arista<String> arista = aristas.proximo();
+					Vertice<String> verticeD = arista.verticeDestino();
+					
+				//	System.out.print("Medidor de N - " + tanque + "-->");
+					double consumoViaje = tanque - this.calcularLitrosPorViaje(arista.peso());
+					//System.out.println("Medicion Nueva " + consumoViaje);
+					boolean puedeViajar = false;
+					if (consumoViaje > 0){
+						puedeViajar = true;
+					//	System.out.println("Me da para viajar");
+					} else {
+						tanque = maxTanque;
+						cargas++;
+						consumoViaje = tanque - this.calcularLitrosPorViaje(arista.peso());
+						if (consumoViaje > 0) {
+							puedeViajar = true;
+					//		System.out.println("Cargo y me da");
+					//		System.out.print("Medidor de N - " + tanque + "-->");
+					//		System.out.println("Medicion Nueva " + consumoViaje);
+					//		System.out.println("---------------------------");
+						}
+					}
+				//	if (!puedeViajar) {
+				//		System.out.println("No me da el tanque por acá");
+				//	}
+					
+					if (!visitados[verticeD.getPosicion()-1] && puedeViajar) {
+						tanque = consumoViaje;
+						this.caminoRecursionMenorCombustible(resul, verticeD, temporal, visitados, destino, tanque, cargas, maxTanque);
+					}
+				}
+			} else {
+			//	System.out.println("//////////////////////////////////");
+			//	System.out.println("Cargas del viaje " + cargas + " y cargas de Resul " + resul.getCargas());
+			//	System.out.println("//////////////////////////////////");
+				if (cargas < resul.getCargas()) {
+					resul.setCargas(cargas);
+					resul.setMejorCamino(temporal.clonar());
+				//	System.out.println("NUEVO CAMINO");
+				}
+			}
+			
+			visitados[vertice.getPosicion()-1] = false;
+			temporal.eliminarEn(temporal.tamanio());
+		
+	}
+	
+*/
 	
 	
 	

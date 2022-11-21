@@ -32,33 +32,33 @@ public class TestMapa {
 		grafo.agregarVertice(v7);
 		grafo.agregarVertice(v8);
 		
-		grafo.conectar(v1, v2, 5);
-		grafo.conectar(v1, v3, 7);
-		grafo.conectar(v1, v6, 3);
-		grafo.conectar(v1, v7, 3);
-		grafo.conectar(v1, v8, 2);
+		grafo.conectar(v1, v2, 50);
+		grafo.conectar(v1, v3, 70);
+		grafo.conectar(v1, v6, 30);
+		grafo.conectar(v1, v7, 30);
+		grafo.conectar(v1, v8, 20);
 		
-		grafo.conectar(v2, v1, 5);
-		grafo.conectar(v2, v3, 4);
+		grafo.conectar(v2, v1, 50);
+		grafo.conectar(v2, v3, 40);
 		
-		grafo.conectar(v3, v1, 7);
-		grafo.conectar(v3, v2, 4);
+		grafo.conectar(v3, v1, 70);
+		grafo.conectar(v3, v2, 40);
 		
-		grafo.conectar(v4, v5, 4);
-		grafo.conectar(v4, v7, 6);
-		grafo.conectar(v4, v8, 5);
+		grafo.conectar(v4, v5, 40);
+		grafo.conectar(v4, v7, 60);
+		grafo.conectar(v4, v8, 50);
 		
-		grafo.conectar(v5, v4, 4);
+		grafo.conectar(v5, v4, 40);
 		
-		grafo.conectar(v6, v1, 3);
-		grafo.conectar(v6, v7, 1);
+		grafo.conectar(v6, v1, 30);
+		grafo.conectar(v6, v7, 10);
 		
-		grafo.conectar(v7, v1, 3);
-		grafo.conectar(v7, v4, 6);
-		grafo.conectar(v7, v6, 1);
+		grafo.conectar(v7, v1, 30);
+		grafo.conectar(v7, v4, 60);
+		grafo.conectar(v7, v6, 10);
 		
-		grafo.conectar(v8, v1, 2);
-		grafo.conectar(v8, v4, 5);
+		grafo.conectar(v8, v1, 20);
+		grafo.conectar(v8, v4, 50);
 		
 		//MapaConDFS mapa = new MapaConDFS();
 		Mapa mapa = new Mapa();
@@ -88,7 +88,7 @@ public class TestMapa {
 		
 		// Inciso E
 		
-		camino = mapa.caminoConMenorCargaCombustible("La Plata", "Villa Elisa", 50);
+		camino = mapa.caminoConMenorCargaCombustible("La Plata", "Villa Elisa", 10);
 		
 		System.out.println("------------------------------------");
 		camino.comenzar();
