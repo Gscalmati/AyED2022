@@ -2,7 +2,10 @@ package tp06.clase1511;
 
 import java.time.temporal.Temporal;
 
+import tp02.ejercicio2.ListaEnlazadaGenerica;
 import tp02.ejercicio2.ListaGenerica;
+import tp06.ejercicio3.Arista;
+import tp06.ejercicio3.Vertice;
 
 public class EP {
 	
@@ -57,8 +60,8 @@ public class EP {
 		
 		
 		
-		public void dfs_private_pasandoPorAlgunNodo (Grafo<T> grafo, 
-				Vetice<T> vertice, 
+		public <T> void dfs_private_pasandoPorAlgunNodo (Grafo<T> grafo, 
+				Vertice<T> vertice, 
 				boolean [] visitados,
 				T datoB,
 				ListaGenerica<T> camino, 
@@ -94,8 +97,8 @@ public class EP {
 			while (!aristas.fin()) {
 				Arista <T> arista = aristas.proximo();
 				Vertice <T> verticeD = arista.verticeDestino();
-				if (!visitados[vericeD]) {
-					this.dfs_private_pasandoPorAlgunNodo (grado, verticeD, visitados, datoB, camino, temporal, datoParaPasar, encontrado);
+				if (!visitados[verticeD.getPosicion()-1]) {
+					this.dfs_private_pasandoPorAlgunNodo (grafo, verticeD, visitados, datoB, camino, temporal, datoParaPasar, encontrado);
 				}
 			
 			}
@@ -107,8 +110,8 @@ public class EP {
 		}
 		
 		
-		public void dfs_private_SinPasarPorOtro (Grafo<T> grafo, 
-				Vetice<T> vertice, 
+		public <T> void dfs_private_SinPasarPorOtro (Grafo<T> grafo, 
+				Vertice<T> vertice, 
 				boolean [] visitados,
 				T datoB,
 				ListaGenerica<T> camino, 
@@ -123,7 +126,7 @@ public class EP {
 		// Proceso Dato
 		if (vertice.dato().equals(datoParaPasar))
 			encontrado = true;
-		if (vertice.dato().equals(datoB)) && (encontrado == true)) {
+		if ((vertice.dato().equals(datoB)) && (encontrado == true)) {
 			
 			// Limpio la lista camino
 			camino.comenzar();
@@ -157,8 +160,8 @@ public class EP {
 		}
 		}
 		
-		public boolean dfs_private_PrimerCaminoYCorte (Grafo<T> grafo, 
-				Vetice<T> vertice, 
+		public <T> boolean dfs_private_PrimerCaminoYCorte (Grafo<T> grafo, 
+				Vertice<T> vertice, 
 				boolean [] visitados,
 				T datoB,
 				ListaGenerica<T> camino, 
